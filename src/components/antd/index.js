@@ -7,7 +7,14 @@ import {
   Menu,
   Icon,
   Avatar,
+  Pagination,
+  message,
 } from 'ant-design-vue'
+
+message.config({
+  duration: 1,
+  maxCount: 2,
+})
 
 const antdComponents = [
   Button,
@@ -21,6 +28,7 @@ const antdComponents = [
   Menu.Item,
   Icon,
   Avatar,
+  Pagination,
 ]
 
 const install = (Vue) => {
@@ -28,6 +36,7 @@ const install = (Vue) => {
     Vue.component(component.name, component)
   )
   Vue.use(Checkbox).use(Card)
+  Vue.prototype.$message = message
 }
 
 export default { install }

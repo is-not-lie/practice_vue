@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Main from '../views/Main'
-import Home from '../views/Home'
-import Product from '../views/Product'
-import Order from '../views/Order'
-import Money from '../views/Money'
+import Main from '../views/Main/main.vue'
+import Home from '../views/Home/home.vue'
+import Product from '../views/Product/product.vue'
+import ProductTable from '../views/Product/product-table.vue'
+import Order from '../views/Order/order.vue'
+import OrderTable from '../views/Order/order-table.vue'
+import Money from '../views/Money/money.vue'
+import MoneyTable from '../views/Money/MoneyTable.vue'
 
 Vue.use(VueRouter)
 
@@ -28,16 +31,40 @@ const routes = [
         path: '/main/product',
         name: 'product',
         component: Product,
+        children: [
+          {
+            path: '/main/product/:id',
+            name: 'product_table',
+            props: true,
+            component: ProductTable,
+          },
+        ],
       },
       {
         path: '/main/order',
         name: 'order',
         component: Order,
+        children: [
+          {
+            path: '/main/order/:id',
+            name: 'order_table',
+            props: true,
+            component: OrderTable,
+          },
+        ],
       },
       {
         path: '/main/money',
         name: 'money',
         component: Money,
+        children: [
+          {
+            path: '/main/money/:id',
+            name: 'money_table',
+            props: true,
+            component: MoneyTable,
+          },
+        ],
       },
     ],
   },

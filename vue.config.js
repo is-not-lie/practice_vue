@@ -1,17 +1,4 @@
 module.exports = {
-  publicPath: './',
-  assetsDir: 'public',
-  devServer: {
-    open: true,
-    port: 3000,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:4000',
-        pathRewrite: { '^/api': '' },
-        changeOrigin: true,
-      },
-    },
-  },
   css: {
     loaderOptions: {
       less: {

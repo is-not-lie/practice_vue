@@ -4,7 +4,12 @@
       <img src="../../assets/img/logo.png" alt="logo" />
       <span>小马开团</span>
     </h1>
-    <a-menu class="nav-wrap" :default-selected-keys="[getSelectedKey]">
+    <a-menu
+      mode="inline"
+      class="nav-wrap"
+      :default-selected-keys="[getSelectedKey]"
+      theme="light"
+    >
       <a-menu-item class="nav-item" v-for="nav in navConfig" :key="nav.key">
         <router-link :to="nav.path">
           <a-icon class="icon" :type="nav.icon" :theme="nav.theme" />
@@ -82,13 +87,6 @@ export default {
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      &:hover {
-        background-color: #1da57a21;
-      }
-      .icon,
-      .nav-title {
-        color: #6c6c6c8c;
-      }
     }
   }
 }
