@@ -9,6 +9,11 @@ import {
   Avatar,
   Pagination,
   message,
+  Form,
+  Input,
+  Select,
+  Upload,
+  Modal,
 } from 'ant-design-vue'
 
 message.config({
@@ -29,13 +34,22 @@ const antdComponents = [
   Icon,
   Avatar,
   Pagination,
+  Form,
+  Form.Item,
+  Input,
+  Input.TextArea,
+  Upload,
+  Modal,
+  Select.Option,
 ]
 
 const install = (Vue) => {
   antdComponents.forEach((component) =>
     Vue.component(component.name, component)
   )
-  Vue.use(Checkbox).use(Card)
+  Vue.use(Checkbox)
+    .use(Card)
+    .use(Select)
   Vue.prototype.$message = message
 }
 

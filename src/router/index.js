@@ -4,6 +4,7 @@ import Main from '../views/Main/main.vue'
 import Home from '../views/Home/home.vue'
 import Product from '../views/Product/product.vue'
 import ProductTable from '../views/Product/product-table.vue'
+import ProductUpdate from '../views/Product_update/AddUpdate.vue'
 import Order from '../views/Order/order.vue'
 import OrderTable from '../views/Order/order-table.vue'
 import Money from '../views/Money/money.vue'
@@ -39,6 +40,12 @@ const routes = [
             component: ProductTable,
           },
         ],
+      },
+      {
+        path: '/main/product_update/:id',
+        name: 'product_update',
+        props: true,
+        component: ProductUpdate,
       },
       {
         path: '/main/order',

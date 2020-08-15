@@ -1,7 +1,7 @@
 <template>
   <a-card>
     <TopNav slot="title" />
-    <router-link slot="extra" to="">
+    <router-link slot="extra" :to="{name: 'product_update',params:{id:'add'}}">
       <a-button type="primary">添加商品</a-button>
     </router-link>
     <router-view></router-view>
