@@ -1,21 +1,9 @@
 <template>
-  <a-table
-    :columns="columns"
-    :data-source="productList"
-    rowKey="id"
-    bordered
-    :row-selection="{
+  <a-table :columns="columns" :data-source="productList" rowKey="id" bordered :row-selection="{
       selectedRowKeys,
       onChange: onSelectChange,
-    }"
-    :pagination="false"
-  >
-    <Pagination
-      slot="footer"
-      :count="selectedRowKeys.length"
-      :proCount="productList.length"
-      @isCheckAll="isCheckAll"
-    />
+    }" :pagination="false">
+    <Pagination slot="footer" :count="selectedRowKeys.length" :proCount="productList.length" @isCheckAll="isCheckAll" />
   </a-table>
 </template>
 
@@ -27,10 +15,7 @@ export default {
   components: {
     Pagination,
   },
-  mounted() {
-    console.log(this.id)
-  },
-  data() {
+  data () {
     return {
       columns: [
         {
@@ -97,10 +82,10 @@ export default {
     }
   },
   methods: {
-    onSelectChange(selectedRowKeys) {
+    onSelectChange (selectedRowKeys) {
       this.selectedRowKeys = selectedRowKeys
     },
-    isCheckAll(isCheckAll) {
+    isCheckAll (isCheckAll) {
       if (isCheckAll) {
         this.productList.forEach((product) => {
           this.selectedRowKeys.push(product.id)
@@ -109,7 +94,7 @@ export default {
     },
   },
   watch: {
-    $route({ params }) {
+    $route ({ params }) {
       this.id = params.id
     },
   },

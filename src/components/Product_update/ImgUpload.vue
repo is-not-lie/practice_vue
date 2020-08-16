@@ -1,7 +1,15 @@
 <template>
   <div class="clearfix">
-    <a-upload class="upload" action="https://www.mocky.io/v2/5cc8019d300000980a055e76" list-type="picture-card" :file-list="fileList" @preview="handlePreview" @change="handleChange">
-      <div v-if="fileList.length < 3">
+    <a-upload
+      class="upload"
+      name="image"
+      action="http://localhost:3000/img/upload"
+      list-type="picture-card"
+      :file-list="product.imgs"
+      @preview="handlePreview"
+      @change="handleChange"
+    >
+      <div v-if="product.imgs.length < 3">
         <a-icon type="plus" />
         <div class="ant-upload-text">
           添加图片
@@ -15,45 +23,51 @@
   </div>
 </template>
 <script>
-function getBase64 (file) {
+import { mapState, mapMutations, mapActions } from 'vuex'
+function getBase64(file) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-  });
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = (error) => reject(error)
+  })
 }
 export default {
-  data () {
+  data() {
     return {
       previewVisible: false,
       previewImage: '',
-      fileList: [
-        {
-          uid: '-1',
-          name: 'image.png',
-          status: 'done',
-          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        },
-      ],
-    };
+    }
   },
   methods: {
-    handleCancel () {
-      this.previewVisible = false;
+    ...mapMutations(['setFileList']),
+    ...mapActions(['removeImg']),
+    handleCancel() {
+      this.previewVisible = false
     },
-    async handlePreview (file) {
+    async handlePreview(file) {
       if (!file.url && !file.preview) {
-        file.preview = await getBase64(file.originFileObj);
+        file.preview = await getBase64(file.originFileObj)
       }
-      this.previewImage = file.url || file.preview;
-      this.previewVisible = true;
+      this.previewImage = file.url || file.preview
+      this.previewVisible = true
     },
-    handleChange ({ fileList }) {
-      this.fileList = fileList;
+    handleChange({ file, fileList }) {
+      if (file.status === 'done') {
+        const { url, name } = file.response.data
+        fileList[fileList.length - 1].url = url
+        fileList[fileList.length - 1].name = name
+      }
+      if (file.status === 'removed') {
+        this.removeImg(file.name)
+      }
+      this.setFileList(fileList)
     },
   },
-};
+  computed: {
+    ...mapState(['product']),
+  },
+}
 </script>
 <style lang="less">
 .proposal {

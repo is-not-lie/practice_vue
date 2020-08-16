@@ -3,23 +3,18 @@
     <header class="base-info-header"><span>商品描述</span></header>
     <div class="base-info-content">
       <div ref="editorElem" style="text-align:left;"></div>
-      <div class="btns">
-        <a-button type="danger">立即上架</a-button>
-        <a-button>保存草稿</a-button>
-      </div>
     </div>
   </section>
 </template>
 
 <script>
 import E from 'wangeditor'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'Editor',
   mounted() {
     this.editor = new E(this.$refs.editorElem)
-    this.editor.customConfig.onchange = (html) => {
-      console.log(html)
-    }
+    this.editor.customConfig.onchange = this.setDesc
     this.editor.customConfig.menus = [
       // 菜单配置
       'head', // 标题
@@ -44,17 +39,8 @@ export default {
     ]
     this.editor.create()
   },
-  data() {
-    return {
-      editor: null,
-      editorContent: '',
-    }
-  },
-  methods: {
-    handleChange(value) {
-      this.category = value
-    },
-  },
+  methods: { ...mapMutations(['setDesc']) },
+  computed: { ...mapState(['product']) },
 }
 </script>
 
@@ -67,12 +53,6 @@ export default {
   }
 }
 .base-info-content {
-  padding: 50px;
-  .btns {
-    margin-top: 20px;
-    button {
-      margin-right: 30px;
-    }
-  }
+  padding: 50px 50px 0;
 }
 </style>

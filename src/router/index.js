@@ -32,6 +32,7 @@ const routes = [
         path: '/main/product',
         name: 'product',
         component: Product,
+        redirect: '/main/product/all',
         children: [
           {
             path: '/main/product/:id',
@@ -51,6 +52,7 @@ const routes = [
         path: '/main/order',
         name: 'order',
         component: Order,
+        redirect: '/main/order/all',
         children: [
           {
             path: '/main/order/:id',
@@ -64,6 +66,7 @@ const routes = [
         path: '/main/money',
         name: 'money',
         component: Money,
+        redirect: '/main/money/detail',
         children: [
           {
             path: '/main/money/:id',

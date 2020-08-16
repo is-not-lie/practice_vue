@@ -1,24 +1,11 @@
 <template>
-  <a-table
-    :columns="columns"
-    :data-source="orderList"
-    rowKey="id"
-    bordered
-    :row-selection="{
+  <a-table :columns="columns" :data-source="orderList" rowKey="id" bordered :row-selection="{
       selectedRowKeys,
       onChange: onSelectChange,
-    }"
-    :pagination="false"
-  >
+    }" :pagination="false">
     <div slot="footer" class="table-footer">
       <span>共 {{ orderList.length }} 条</span>
-      <a-pagination
-        :current="current"
-        :total="total"
-        showQuickJumper
-        show-size-changer
-        @change="onChange"
-      />
+      <a-pagination :current="current" :total="total" showQuickJumper show-size-changer @change="onChange" />
     </div>
   </a-table>
 </template>
@@ -27,10 +14,7 @@
 // import dayjs from 'dayjs'
 export default {
   props: ['id'],
-  mounted() {
-    console.log(this.id)
-  },
-  data() {
+  data () {
     return {
       columns: [
         {
@@ -69,15 +53,15 @@ export default {
     }
   },
   methods: {
-    onSelectChange(selectedRowKeys) {
+    onSelectChange (selectedRowKeys) {
       this.selectedRowKeys = selectedRowKeys
     },
-    onChange(current) {
+    onChange (current) {
       this.current = current
     },
   },
   watch: {
-    $route({ params }) {
+    $route ({ params }) {
       this.id = params.id
     },
   },
